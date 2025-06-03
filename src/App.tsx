@@ -2,13 +2,12 @@
 
 
 import './App.css'
+import Quiz from './components/Quiz'
 
 function App() {
 
   return (    
-    <div>        
-      <h1 className="text-center">React Quiz App</h1>      
-    </div>
+    <Quiz />
   )
 }
 
