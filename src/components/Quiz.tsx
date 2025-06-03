@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { questions as allQuestions} from "../data/questions";
+import { motion, AnimatePresence} from "framer-motion";
 
 function shuffleAndPickFive (arr: typeof allQuestions) {
     const shuffled = [...arr].sort(() => 0.5 -  Math.random());
@@ -55,7 +56,13 @@ export default function Quiz() {
     <div className="h-screen bg-[#001e4d] flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
         <h1 className="text-2xl font-semibold text-[#001e4d] mb-6">Simple Quiz</h1>
-        <h2 className="text-xl font-semibold mb-4">
+        <AnimatePresence mode="wait"> 
+            <motion.div key={currentQuestionIndex}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.6 }}>
+                <h2 className="text-xl font-semibold mb-4">
             {currentQuestion.question}
         </h2>
         <div className="grid gap-6 mb-6">
@@ -73,6 +80,8 @@ export default function Quiz() {
             )})}
             
         </div>
+            </motion.div>
+        </AnimatePresence>
         <div className="flex flex-col items-center justify-center gap-6">
             <button className="bg-[#001e4d] text-white px-8 py-2 rounded-sm text-xl cursor-pointer" onClick={handleNextClick}>Next</button>
             <div className="text-gray-600 text-sm text-center">
